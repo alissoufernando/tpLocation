@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('voitures', function (Blueprint $table) {
             $table->id();
+            $table->string('plaque');
             $table->string('marque');
-            $table->string('pathImage')->default('image.png');
+            $table->string('model');
+            $table->string('disponible')->default('non');
+            $table->string('pathImage');
             $table->string('couleur');
-            $table->float('prix');
-            $table->integer('nbrRoue');
-            $table->integer('nbrPortiere');
-            $table->integer('nbrPlace');
+            $table->integer('prix');
+           
             $table->timestamps();
         });
     }

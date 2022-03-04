@@ -14,8 +14,11 @@ class Location extends Model
     protected $fillable = [
         'dateDebutLocation',
         'dateFinLocation',
+        'telephone',
         'user_id',
         'voiture_id',
+        'autoriser',
+        'rendre',
     ];
 
     public function user()
@@ -25,6 +28,6 @@ class Location extends Model
 
     public function voiture()
     {
-        return $this->hasOne(Voiture::class);
+        return $this->belongsTo(Voiture::class);
     }
 }

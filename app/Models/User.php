@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Role;
+use App\Models\Location;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use App\Models\Location;
 
 class User extends Authenticatable
 {
@@ -46,5 +47,21 @@ class User extends Authenticatable
     public function locations()
     {
         return $this->hasMany(Location::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    // cette fonction est celle appeler pour verifier le role de lutilisateur
+    public function isAdmin()
+    {
+        return $this->roles()->where('nom', 'admin')->first();
+    }
+
+    public function hasAnyRole(array $roles)
+    {
+        return $this->roles()->whereIn('nom', $roles)->first();
     }
 }

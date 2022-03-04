@@ -17,8 +17,12 @@ return new class extends Migration
             $table->id();
             $table->date('dateDebutLocation');
             $table->date('dateFinLocation');
+            $table->string('telephone');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('voiture_id')->constrained();
+            $table->string('etat')->default('En cours de traitement');
+            $table->string('autoriser')->default('non valider');
+            $table->string('rendre')->default('non');
             $table->timestamps();
         });
     }
